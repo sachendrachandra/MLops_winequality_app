@@ -40,4 +40,7 @@ git remote add origin https://github.com/sachendrachandra/MLops_winequality_app.
 git push -u origin main
 ```
 
-
+update dvc.yaml file
+```bash
+dvc repro
+```
