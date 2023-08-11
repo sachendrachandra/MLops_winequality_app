@@ -1,7 +1,7 @@
 # read the data from data source
 # save it in the data/raw for further process
 import os
-from get_data import read_params, get_data
+from get_data import get_data, read_params
 import argparse
 
 def load_and_save(config_path):
