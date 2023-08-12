@@ -44,3 +44,29 @@ update dvc.yaml file
 ```bash
 dvc repro
 ```
+
+check metrics
+```bash
+dvc metrics show
+```
+
+check metrics history 
+```bash
+dvc metrics diff
+```
+
+what is tox ?
+https://tox.wiki/en/4.7.0/
+
+create test methods in tests/test_config.py. Make sure the module name always starts with "test" keyword
+
+first run below commands
+
+```bash
+tox
+```
+
+```bash
+pytest -v
+```
+above command generates pycache directory
