@@ -39,8 +39,6 @@ def train_and_evaluate(config_path):
     train=train.drop('Id', axis=1)
     test= test.drop('Id', axis=1)
 
-
-
     train_y = train[target]
     test_y = test[target]
 
@@ -51,7 +49,7 @@ def train_and_evaluate(config_path):
         alpha=alpha, 
         l1_ratio=l1_ratio, 
         random_state=random_state)
-    lr.fit(train_x, train_y)
+    lr.fit(train_x.values, train_y.values)
     
 
     

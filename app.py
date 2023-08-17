@@ -20,11 +20,15 @@ def read_params(config_path):
 
 def predict(data):
     config = read_params(params_path)
+    print(params_path)
     model_dir_path = config["webapp_model_dir"]
+    print(model_dir_path)
     model = joblib.load(model_dir_path)
-    prediction = model.predict(data).tolist()[0]
+    prediction = model.predict(data).tolist()
+    return prediction
 
 def api_response(dict_request):
+    print("sdsd")
     pass
 
 @app.route("/", methods=["GET", "POST"])
@@ -33,12 +37,13 @@ def index():
     if request.method == "POST":
         # pass
         try:
-            pass
+            # pass
             if request.form:
                 data = dict(request.form).values()
+                print(data)
                 data = [list(map(float,data))]
                 response = predict(data)
-                print(response)
+                print("response dekh lo: ", response)
                 return render_template("index.html", response=response)
             elif request.json:
                 response = api_response(request)
