@@ -20,6 +20,7 @@ def split_and_saved_data(config_path):
         test_size=split_ratio, 
         random_state=random_state
         )
+    print(train.shape, test.shape)
     train.to_csv(train_data_path, sep=",", index=False, encoding="utf-8")
     test.to_csv(test_data_path, sep=",", index=False, encoding="utf-8")
 

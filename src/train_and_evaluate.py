@@ -35,6 +35,11 @@ def train_and_evaluate(config_path):
 
     train = pd.read_csv(train_data_path, sep=",")
     test = pd.read_csv(test_data_path, sep=",")
+    
+    train=train.drop('Id', axis=1)
+    test= test.drop('Id', axis=1)
+
+
 
     train_y = train[target]
     test_y = test[target]
@@ -47,9 +52,11 @@ def train_and_evaluate(config_path):
         l1_ratio=l1_ratio, 
         random_state=random_state)
     lr.fit(train_x, train_y)
+    
+
+    
 
     predicted_qualities = lr.predict(test_x)
-    
     (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
 
     print("Elasticnet model (alpha=%f, l1_ratio=%f):" % (alpha, l1_ratio))

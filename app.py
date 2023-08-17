@@ -3,8 +3,9 @@ import os
 import numpy as np
 from prediction_service import prediction
 import joblib
+import yaml 
 
-
+params_path= "params.yaml"
 webapp_root = "webapp"
 
 static_dir = os.path.join(webapp_root, "static")
@@ -34,11 +35,13 @@ def index():
         try:
             pass
             if request.form:
-                dict_req = dict(request.form)
-                response = prediction.form_response(dict_req)
+                data = dict(request.form).values()
+                data = [list(map(float,data))]
+                response = predict(data)
+                print(response)
                 return render_template("index.html", response=response)
             elif request.json:
-                response = prediction.api_response(request.json)
+                response = api_response(request)
                 return jsonify(response)
 
         except Exception as e:
