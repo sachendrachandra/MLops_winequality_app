@@ -20,33 +20,37 @@ def read_params(config_path):
 
 def predict(data):
     config = read_params(params_path)
-    print(params_path)
     model_dir_path = config["webapp_model_dir"]
-    print(model_dir_path)
     model = joblib.load(model_dir_path)
-    prediction = model.predict(data).tolist()
+    prediction = model.predict(data).tolist()[0]
     return prediction
 
 def api_response(dict_request):
-    print("sdsd")
-    pass
+    try:
+        data = np.array([list(dict_request.values())])
+        response = predict(data)
+        response = {"response": response}
+        return response
+    except Exception as e:
+        print(e)
+        error = {"error": "Something went wrong!! Try again later!"}
+        error = {"error": e}
+        return render_template("404.html", error=error)
+
+            
 
 @app.route("/", methods=["GET", "POST"])
 def index():
 
     if request.method == "POST":
-        # pass
         try:
-            # pass
             if request.form:
                 data = dict(request.form).values()
-                print(data)
                 data = [list(map(float,data))]
                 response = predict(data)
-                print("response dekh lo: ", response)
                 return render_template("index.html", response=response)
             elif request.json:
-                response = api_response(request)
+                response = api_response(request.json)
                 return jsonify(response)
 
         except Exception as e:
