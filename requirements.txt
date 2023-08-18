@@ -5,6 +5,7 @@
 dvc
 dvc[gdrive]
 scikit-learn
+pyyaml
 pandas
 pytest
 tox
